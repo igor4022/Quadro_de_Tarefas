@@ -22,9 +22,12 @@ const dragLeave = ({target}) => {
 }
 
 const drop = ({target}) => {
-   if (target.classList.contains("coluna_cor")) 
+    if (target.classList.contains("coluna_interna"))
+
+   
     target.classList.remove("coluna_cor")
     target.append(carta)
+    
 }
 
 const createCard = ({target}) => {
@@ -33,7 +36,12 @@ const createCard = ({target}) => {
     card.draggable = "true"
     card.contentEditable = "true"
     card.addEventListener("dragstart", dragStart)
+
+    card.addEventListener("focusout", () => {
+        if (!card.textContent) card.remove()
+    })
     target.append(card)
+    card.focus()
     
 }
 
